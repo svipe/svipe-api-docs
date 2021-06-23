@@ -4,4 +4,4 @@ Documentation
 - Applications
   - [Keycloak](app-keycloak)
   - [Nextcloud](app-nextcloud)
-  - [Wordpress](app-wordpress)
+  - [WordPress](app-wordpress)
