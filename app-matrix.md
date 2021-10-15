@@ -32,7 +32,7 @@ Add the local configuration with the Svipe oidc demo credentials to the synapse 
       - idp_id:    svipe_idp
         idp_name:  "Svipe iD"
         discover:  true
-        issuer:   "https://api.svipe.com/oidc/v1"
+        issuer:   "{{ oidc_root }}"
         client_id:      "svipe-demo"
         client_secret:  "svipe-demo-secret"
         scopes: ["openid", "profile"]
