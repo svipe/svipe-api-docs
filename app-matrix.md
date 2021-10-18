@@ -38,8 +38,8 @@ Add the local configuration with the Svipe oidc demo credentials to the synapse 
         scopes: ["openid", "profile"]
         user_mapping_provider:
           config:
-            localpart_template:     "{{ user.svipeid }}"
-            display_name_template:  "{{ user.name }}"
+            localpart_template:     "{{ '{{ user.svipeid }}' }}"
+            display_name_template:  "{{ '{{ user.name }}' }}"
     ---END
 
 Then start the server (add the `-d` option in case you want to run it in the background, but run the first tie without as it will make it easy to detect any configuration error):
