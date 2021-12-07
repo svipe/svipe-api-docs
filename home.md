@@ -25,9 +25,7 @@ For demo purposes you can use the following credentials:
 
 To define your own custom applications, please visit [this page](/applications ":ignore").
 
-## Claims
-
-# Authentication/Disclosure
+# Claims used in Authentication/Disclosure
 
 Essentially we support standard OIDC claims, add some from mDL and have custom claims for signing, certificate pickup and multi factor authentication.
 
