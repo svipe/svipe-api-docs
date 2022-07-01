@@ -72,7 +72,7 @@ Currently not available claims are ~~marked~~.
 | ~~nickname~~| string|Casual name of the End-User that may or may not be the same as the given_name. For instance, a nickname value of Mike might be returned alongside a given_name value of Michael. |
 | ~~preferred_username~~| string| Shorthand name by which the End-User wishes to be referred to at the RP, such as janedoe or j.doe. This value MAY be any valid JSON string including special characters such as @, /, or whitespace. The RP MUST NOT rely upon this value being unique, as discussed in Section 5.7.|
 | ~~profile~~ | string| URL of the End-User's profile page. The contents of this Web page SHOULD be about the End-User.|
-| ~~picture~~ | string|URL of the End-User's profile picture. This URL MUST refer to an image file (for example, a PNG, JPEG, or GIF image file), rather than to a Web page containing an image. Note that this URL SHOULD specifically reference a profile photo of the End-User suitable for displaying when describing the End-User, rather than an arbitrary photo taken by the End-User. |
+| ~~picture~~ (consider com.svipe:document_portrait as an alternative) | string|URL of the End-User's profile picture. This URL MUST refer to an image file (for example, a PNG, JPEG, or GIF image file), rather than to a Web page containing an image. Note that this URL SHOULD specifically reference a profile photo of the End-User suitable for displaying when describing the End-User, rather than an arbitrary photo taken by the End-User. |
 | ~~website~~ | string|URL of the End-User's Web page or blog. This Web page SHOULD contain information published by the End-User or an organization that the End-User is affiliated with. |
 | email| string| End-User's preferred e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique, as discussed in Section 5.7.|
 | email_verified| boolean|True if the End-User's e-mail address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this e-mail address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating. |
@@ -91,37 +91,35 @@ From the standard for Mobile Drivers License https://www.iso.org/standard/69084.
 
 | Claim | Type | Description
 | --- | --- | --- |
-| svipeid | string | A globally unique identifier issued by Svipe. It is the same as sub above.|
-| peerid | string | A unique identifier issued by Svipe to a particular Relying Party.|
+| com.svipe:svipeid | string | Same as `sub` above. A globally unique identifier issued by Svipe to the user. Under normal conditions, a given person will retain the same Svipe ID even after renewing the underlying identity document.  |
+| com.svipe:document_portrait | string| Photo from the document, provided as a data url.  |
+| com.svipe:document_nationality | string | End-User's nationality. Alpha-3 format.|
+| com.svipe:document_type | string| Document type as specified by the ICAO 9303, 1 ot 2 characters. Typically,  P for Passport and I for Identity Card, but this can vary and/or additional documents with their own types, such as residence permits, may exist for some countries. |
+| com.svipe:document_number | string| The document number, as per the standard of the corresponding issuing country. This number is unique for issuing country, but may not be unique globally and will change as the users renew the underlying identity document.|
+| com.svipe:document_issuing_country | string| Country that issued the document. |
+| com.svipe:document_expiry_date | string | Date of expiry for the document. YYYY-MM-DD format.|
+| (deprecated) administrative_number   | string| This could be a SSN (Social Security Number) or any other national identifier such as Swedish personal number. |
+| (deprecated) person_number   | string| Specifically a Swedish person number|
+
+<!-- | peerid | string | A unique identifier issued by Svipe to a particular Relying Party.|
 |  ~~resident_address~~ | string| Currently ABSENT.|
 |  ~~resident_city~~ | string| Currently ABSENT.|
 |  ~~resident_state~~ | string| Currently ABSENT.|
 |  ~~resident_postal_code~~ | string | Currently ABSENT.|
-| portrait | string| same as picture above |
 | portrait_capture_date | string| same as picture above |
-| signature | string| End users signature using the same representation as picture |
-| nationality | string | End-User's nationality. Alpha-3.|
-| administrative_number | string| This could be a SSN (Social Security Number) or any other national identifier such as Swedish personal number|
-| person_number | string| Specifically a Swedish person number|
-| document_type | string| P for Passport and I for Identity Card and X for Residence Card (link to spec).|
-| document_number | string| A unique number in the underlying document|
 | issuing_authority | string| Document issuing authority.|
-| issuing_country| string| Country that issued the document. |
-| expiry_date| string | When the document expires. Format like birthday.|
 | ~~document_issue_date~~ | string | Currently ABSENT. When the document was issued. Format like birthday.|
 | document_all| string | All of the document_ attributes|
 | ~~document_driving_privileges~~  | string| Currently ABSENT.|
-| birth_date| string | Same as birthdate.|
-| ~~age_in_years~~ | number | |
-| ~~age_over_18~~ | boolean | |
-| ~~age_over_21~~ | boolean | |
+| age_in_years | number | Age in years |
+| age_over_18 | boolean | True if the person is older than 18. |
+| age_over_21 | boolean | True if the person is older than 18. |
 | twitter|string | the Twitter handle i.e @johansellstrom|
 | facebook| string | the Facebook handle i.e @johansellstrom|
 | google| string | the Google handle i.e johan.sellstrom@gmail.com or some other email|
-| covid19_vaccinated| boolean | if the subject had all the vaccinations for Covid19 more than 14 days ago |
 | location| string | geographical coordinates <+59.48693000,+18.30116340> +/- 10408.74m (speed 0.00 mps / course 0.00) @ 2021-05-27 |
-
-
+| covid19_vaccinated| boolean | if the subject had all the vaccinations for Covid19 more than 14 days ago |
+ -->
 ### Authentication Method
 
 
