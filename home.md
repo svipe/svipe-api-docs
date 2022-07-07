@@ -1,13 +1,29 @@
 
 # Implementation
 
-It is very easy to to use Svipe iD. We use standard Openid Connect according to this specification [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html) with a few custom claims, most notably to support eMRTD document requests and verification.
+It is very easy to use Svipe iD. We use standard OpenID Connect according to as
+specified in [OpenID Connect Core
+1.0](https://openid.net/specs/openid-connect-core-1_0.html) with a few custom
+claims, most notably to support eMRTD document requests and verification.
 
-When the new specification [OpenID Connect for Identity Assurance 1.0](https://openid.net/specs/openid-connect-4-identity-assurance-1_0-12.html) is final we will support this as well.
+When the new specification [OpenID Connect for Identity Assurance
+1.0](https://openid.net/specs/openid-connect-4-identity-assurance-1_0-12.html)
+is final we will support it as well.
 
-In Openid terminology a Relying Party is an app or webservice that wants to use Openid to authenticate users. The first step towards implemntation is to pick an Openid Service Provider or a software libary to be a Relying Party Client. Lists of certified alternatives can be found here [Certified OpenID Connect Implementations](https://openid.net/developers/certified/)
+In OpenID terminology a Relying Party is an app or webservice that wants to use
+OpenID to authenticate users. The first step towards implementation is to pick
+an OpenID Service Provider or a software library to be a Relying Party Client.
+Lists of certified alternatives can be found here [Certified OpenID Connect
+Implementations](https://openid.net/developers/certified/)
 
-Many popular software packages have built in support for Openid. We describe reference implementations for [Keycloak](https://developer.svipe.com/documentation#/app-keycloak), [Matrix](https://developer.svipe.com/documentation#/app-matrix), [Keycloak](https://developer.svipe.com/documentation#/app-keycloak), [Mattermost](https://developer.svipe.com/documentation#/app-mattermost), [Nextcloud](https://developer.svipe.com/documentation#/app-nextcloud) and [Wordpress](https://developer.svipe.com/documentation#/app-wordpress)
+Many popular software packages have built in support for Openid. We describe
+reference implementations for:
+[Keycloak](https://developer.svipe.com/documentation#/app-keycloak),
+[Matrix](https://developer.svipe.com/documentation#/app-matrix),
+[Keycloak](https://developer.svipe.com/documentation#/app-keycloak),
+[Mattermost](https://developer.svipe.com/documentation#/app-mattermost),
+[Nextcloud](https://developer.svipe.com/documentation#/app-nextcloud) and
+[Wordpress](https://developer.svipe.com/documentation#/app-wordpress)
 
 # OIDC Configuration
 
