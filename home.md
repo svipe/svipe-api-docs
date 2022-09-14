@@ -1,14 +1,14 @@
 
 # Implementation
 
-It is very easy to use Svipe iD. We use standard OpenID Connect according to as
-specified in [OpenID Connect Core
-1.0](https://openid.net/specs/openid-connect-core-1_0.html) with a few custom
-claims, most notably to support eMRTD document requests and verification.
+It is very easy to use Svipe iD. We use standard OpenID Connect as specified in
+[OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
+with a few custom claims, most notably to support eMRTD document requests and
+verification.
 
 When the new specification [OpenID Connect for Identity Assurance
 1.0](https://openid.net/specs/openid-connect-4-identity-assurance-1_0-12.html)
-is final we will support it as well.
+is final, we will support it as well.
 
 In OpenID terminology a Relying Party is an app or webservice that wants to use
 OpenID to authenticate users. The first step towards implementation is to pick
@@ -93,7 +93,7 @@ Currently not available claims are ~~marked~~.
 | email| string| End-User's preferred e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique, as discussed in Section 5.7.|
 | email_verified| boolean|True if the End-User's e-mail address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this e-mail address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating. |
 | gender| string|End-User's gender. Values defined by this specification are female and male. Other values MAY be used when neither of the defined values are applicable. |
-| birthdate| string| End-User's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format. The year MAY be 0000, indicating that it is omitted. To represent only the year, YYYY format is allowed. Note that depending on the underlying platform's date related function, providing just year can result in varying month and day, so the implementers need to take this factor into account to correctly process the dates.|
+| birthdate| string| End-User's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.|
 |  ~~zoneinfo~~| string|String from zoneinfo [zoneinfo] time zone database representing the End-User's time zone. For example, Europe/Paris or America/Los_Angeles. |
 | locale  | string|  End-User's locale, represented as a BCP47 [RFC5646] language tag. This is typically an ISO 639-1 Alpha-2 [ISO639‑1] language code in lowercase and an ISO 3166-1 Alpha-2 [ISO3166‑1] country code in uppercase, separated by a dash. For example, en-US or fr-CA. As a compatibility note, some implementations have used an underscore as the separator rather than a dash, for example, en_US; Relying Parties MAY choose to accept this locale syntax as well.|
 |phone_number | string|End-User's preferred telephone number. E.164 [E.164] is RECOMMENDED as the format of this Claim, for example, +1 (425) 555-1212 or +56 (2) 687 2400. If the phone number contains an extension, it is RECOMMENDED that the extension be represented using the RFC 3966 [RFC3966] extension syntax, for example, +1 (604) 555-1234;ext=5678. |
