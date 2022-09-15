@@ -141,6 +141,25 @@ or in the `acr_values` request parameter:
 
     &acr_values=face_present
 
+# Other features
+
+## Backchannel logout
+
+Svipe supports the new [backchannel
+logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) protocol.
+The backchannel logout URL is specified in the [applications
+section](https://developer.svipe.com/applications) of the Svipe developer
+portal.
+
+## Frontchannel logout
+
+Svipe supports the forthcoming [frontchannel
+logout](https://openid.net/specs/openid-connect-frontchannel-1_0-06.html) protocol.
+The frontchannel logout URL is specified in the [applications
+section](https://developer.svipe.com/applications) of the Svipe developer
+portal.
+
+
 # Special features
 
 ## Pre-loaded QR-codes

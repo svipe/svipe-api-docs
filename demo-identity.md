@@ -78,4 +78,8 @@ To enable:
 * login with your Svipe iD
 * check the option "Allow Demo User"
 
+<div class="img-80 center">
+
 ![start screen](./images/demo-identity/demo-ok.jpg)
+
+</div>
