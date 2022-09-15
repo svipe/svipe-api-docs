@@ -188,7 +188,7 @@ Sample QR-codes using the `svipe-demo` client_id (`state` and `nonce`kept short 
 
 | Variant | QR-code |
 | :---    | :---    |
-| Regular | app.svipe.com/a/svipe-demo`.`M5Nv1.zPPik |
+| Regular | app.svipe.com/a/svipe-demo.M5Nv1.zPPik |
 | PKCE    | app.svipe.com/a/svipe-demo.M5Nv1.zPPik.7yUKf4oSfO-4IqWG36xlE0P7N9SdO1gObCc10uUFlvc.S256 |
 
 
