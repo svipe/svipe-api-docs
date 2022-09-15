@@ -65,27 +65,26 @@ These claims can be added by the user and are verified by Svipe through a round-
 | Claim                 | Description       |
 | :---                  | :---              |
 | email                 | E-mail address    |
-| email_verified        | Always **True** if present, since all emails are verified. |
 | phone_number          | Telephone number in [E.164](https://en.wikipedia.org/wiki/E.164) compliant format. |
-| phone_number_verified | Always **True** if present, since all phone numbers are verified. |
 
-The following claims are preferences configured by the user or system settings :
+These claims are defined by the OIDC standard, to help differentiate between verified and unverified emails and phone numbers. However, Svipe always verify emails and phone numbers before they are allowed to be added, so these claims will always be true if they are present:
+
+| Claim                 | Description                |
+| :---                  | :---                       |
+| email_verified        | Always **True** if present |
+| phone_number_verified | Always **True** if present |
+
+
+The following claims are preferences configured by the user or derived from system settings:
 
 | Claim                 | Description       |
 | :---                  | :---              |
 | locale                | End-User's locale |
 
-We currently do not support the following standard claims:
 
-* middle_name
-* nickname
-* preferred_username
-* profile
-* picture
-* website
-* zoneinfo
-* address
-* updated_at
+We currently do not support the following standard claims: `middle_name`,
+`nickname`, `preferred_username`, `profile`, `picture`, `website`, `zoneinfo`,
+`address`, and `updated_at`.
 
 ## Custom Claims
 
@@ -138,6 +137,54 @@ To request `face_precent`, either specify `acr` as an `id_token` claim:
         }
     }
 
-or in the acr_values request parameter:
+or in the `acr_values` request parameter:
 
     &acr_values=face_present
+
+# Special features
+
+## Pre-loaded QR-codes
+
+To facilitate integration of Svipe iD, and to reduce the size of QR-codes, we
+have added support for pre-defining query-parameters for QR-codes in our admin
+interface. The parameters are defined for each application in the [Svipe
+developer portal](http://developer.dev.bes.svipeid.com/applications) in the
+section `Pre-loaded Query`:
+
+![start screen](./images/demo-identity/demo-ok.jpg)
+
+The QR-code can then be created entirely client-side and must contain the
+following parameters separated by the dot (`.`) character:
+
+* `client_id`
+* `state`
+* `nonce`
+
+If PKCE is used (which we recommend), then those parameters also need to be added:
+
+* `code_challenge`
+* `code_challenge_method`
+
+Sample QR-codes using the `svipe-demo` client_id (`state` and `nonce`kept short for clarity):
+
+| Variant | QR-code |
+| :---    | :---    |
+| Regular | app.svipe.com/a/svipe-demo`.`M5Nv1.zPPik |
+| PKCE    | app.svipe.com/a/svipe-demo.M5Nv1.zPPik.7yUKf4oSfO-4IqWG36xlE0P7N9SdO1gObCc10uUFlvc.S256 |
+
+
+All other parameters needs to be added in the admin interface.
+
+Since the QR-code is scanned by the user with the Svipe iD-app, the
+page needs to communicate with the svipe oidc-backed so that it gets notified
+when the user has scanned the code and approved the sharing of information. This
+is done using a socketio connection to api.svipe.com.
+
+To make this more clear, we have provided [sample code in python on
+github](https://github.com/svipe/svipe-oidc-rp-samples) for an RP that uses
+pre-loaded QR-codes to login. More information in the
+[Readme](https://github.com/svipe/svipe-oidc-rp-samples/blob/main/README.md)
+file and the specic code in the
+[2_Auth_Flow_Preloaded_Qrcode](https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode)
+subdirectory
+
