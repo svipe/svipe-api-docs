@@ -37,12 +37,21 @@ to the standard (where `middle_name`, `nickname`, `preferred_username`,
 `profile`, `picture`, `website`, `gender`, `birthdate`, `zoneinfo`, `locale`,
 and `updated_at` are also included). 
 
-| Scope     | Claims
-| :---      | :---
-| openid    | svipeid
-| profile   | name, given_name, family_name
-| email     | email, email_verified
-| phone     | phone_number, phone_number_verified
+| Scope     | Claims                                |
+| :-------  | :------------------------------------ |
+| openid    | svipeid                               |
+| profile   | name, given_name, family_name         |
+| email     | email, email_verified                 |
+| phone     | phone_number, phone_number_verified   |
+
+We also offer two document-centric scopes, so that you can ask for all
+information available from a document using a single scope identifier rather
+than naming the individual claims.
+
+| Scope         | Claims |
+| :---          | :---
+| document      | name, <br>given_name, <br>family_name, <br>gender, <br>birthdate, <br>com.svipe:svipeid, <br>com.svipe:document_nationality, <br>com.svipe:document_nationality_en, <br>com.svipe:document_type, <br>com.svipe:document_type_sdn, <br>com.svipe:document_type_sdn_en, <br>com.svipe:document_number, <br>com.svipe:document_issuing_country, <br>com.svipe:document_issuing_country_en, <br>com.svipe:document_expiry_date, <br>com.svipe:document_administrative_number
+| document_full | same as `document` but also includes `com.svipe:document_portrait`
 
 
 ## Standard Claims
