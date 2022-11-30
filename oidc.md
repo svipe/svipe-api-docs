@@ -193,7 +193,7 @@ If PKCE is used (which we recommend), then those parameters also need to be adde
 * `code_challenge`
 * `code_challenge_method`
 
-Sample QR-codes using the `svipe-demo` client_id (`state` and `nonce`kept short for clarity):
+Sample QR-codes using the `svipe-demo` client_id (`state` and `nonce` kept short for clarity):
 
 | Variant | QR-code |
 | :---    | :---    |
@@ -216,3 +216,41 @@ file and the specic code in the
 [2_Auth_Flow_Preloaded_Qrcode](https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode)
 subdirectory
 
+
+## Non-standard Authorization Flows / Embedded Apps and Bots
+
+If the value for `display` in the call to authorize is `authref`, then a number
+of values are returned to facilitate the building of a custom QR code page. This
+is useful in a bot context where it's desirable to contain all interaction
+within the bot UI and not redirect to an external web page.
+
+
+| Claim      | Description |
+| :--------- | :---------- |
+| qrlink     | The link in the QR code. This is useful if you are using your own library to build the QR code. |
+| qrcode     | If instead you want an image link to a generated QR code, then use this value. The link supports the extra query parameters `scale`, `module_color` and `background` to further define the size of the QR code and the colors used in it. The default value for `scale` is 3.  `module_color` and `background` colors are given as RGB colors. A sample query could be `?scale=3&module_color=000000&background=FFFFFF`.
+| applink    | The link used in a button to trigger Svipe iD when used on a mobile device, as in this case the QR code can't be read. |
+| qrauth     | The link to the authorization page created by Svipe, which in turns display the qrcode. |
+| expires_in | The validity (in seconds) of the QR code. |
+| expires_at | The UTC timestamp in seconds when the QR code will expire. |
+| session    | The OIDC session identifier which is used in the registration call to socketio |
+| server     | The server that should be used for connecting using socketio |
+
+So, to build an authorization flow in an app such as a bot, we propose the following:
+
+1) Initiate the oidc authorization with a call to {{ oidc_root }}/authorize using `authref` as the value of the `display` parameter.
+2) Use the returned information to display a QR code, or a button, to the user to initiate the identity verification.
+3) The app will receive a callback to the `redirect_uri` with an `authorization code` when the user has completed the verification.
+4) Use the `authorization code` in call to {{ oidc_root }}/token to retrieve an `access token`.
+5) The `access token` can finally be used in a call to {{ oidc_root }}/userinfo to retrieve the requested information as a JSON object.
+
+Steps 3-5 is the standard OIDC process and note that as per the OIDC standard all, or parts of, the information requested can also be returned in the id_token (to avoid the call to userinfo).
+
+If you're building this process without using an oidc library, then have a look
+at the sample code in  
+[2_Auth_Flow_Preloaded_Qrcode]https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode/app-nolib-fastapi.py as it has the steps 3-5 described in code.
+
+Optionally the app can register itself with socketio to be notified when the
+user has scanned the QR code. See the sample code in
+[2_Auth_Flow_Preloaded_Qrcode](https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode)
+to understand how that call looks like.
