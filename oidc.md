@@ -222,7 +222,7 @@ subdirectory
 If the value for `display` in the call to authorize is `authref`, then a number
 of values are returned to facilitate the building of a custom QR code page. This
 is useful in a bot context where it's desirable to contain all interaction
-within the bot UI and not redirect to an external web page.
+within the bot UI and not redirect the user to an external web page.
 
 
 | Claim      | Description |
@@ -242,15 +242,15 @@ So, to build an authorization flow in an app such as a bot, we propose the follo
 2) Use the returned information to display a QR code, or a button, to the user to initiate the identity verification.
 3) The app will receive a callback to the `redirect_uri` with an `authorization code` when the user has completed the verification.
 4) Use the `authorization code` in call to {{ oidc_root }}/token to retrieve an `access token`.
-5) The `access token` can finally be used in a call to {{ oidc_root }}/userinfo to retrieve the requested information as a JSON object.
+5) The `access token` can then be used in a call to {{ oidc_root }}/userinfo to retrieve the requested information as a JSON object.
 
 Steps 3-5 is the standard OIDC process and note that as per the OIDC standard all, or parts of, the information requested can also be returned in the id_token (to avoid the call to userinfo).
 
 If you're building this process without using an oidc library, then have a look
-at the sample code in  
-[2_Auth_Flow_Preloaded_Qrcode]https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode/app-nolib-fastapi.py as it has the steps 3-5 described in code.
+at the sample code
+[here](https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode/app-nolib-fastapi.py), as it has the steps 3-5 described in code (python).
 
 Optionally the app can register itself with socketio to be notified when the
-user has scanned the QR code. See the sample code in
-[2_Auth_Flow_Preloaded_Qrcode](https://github.com/svipe/svipe-oidc-rp-samples/tree/main/2_Auth_Flow_Preloaded_Qrcode)
-to understand how that call looks like.
+user has scanned the QR code. See the sample javascript code
+[here](https://github.com/svipe/svipe-oidc-rp-samples/blob/main/2_Auth_Flow_Preloaded_Qrcode/templates/logged_out.html)
+to understand the socketio interaction.
