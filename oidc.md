@@ -165,6 +165,8 @@ Create a new app in the Svipe Developer portal, enable CIBA and configure push d
 
 Note that the `Client notfication endpoint` needs to be a publicly available host that is reachable from the Svipe backend server. If you use a self-signed https server, then select `Self-signed endpoint` and the SSL certificate will not be verified.
 
+In this example we have used the free service from [API Mocha](https://apimocha.com), which allows you to instantly create a free endpoint that accepts and displays an incoming http request.
+
 ## CIBA walkthrough with curl
 
 Let's do a full authorization using the command line. Start by initiating a CIBA request (but replace the value for `client_id` with the one for the app that you configured in the developer portal):
@@ -174,18 +176,19 @@ Let's do a full authorization using the command line. Start by initiating a CIBA
 This call will return:
 
     {
-    "auth_req_id": "nmidq2_-kp2lKrLLOwYmTg4ib_t9NBnppV-YXVP6",
+    "auth_req_id": "1OI-MCPvdV2BnuMNDAgjgFNUEWkWJFw0KSkBkCVq",
     "expires_in": 1800,
     "interval": 5,
         "authref": {
-            "qrlink":  "https://app.svipe.com/ad/PFE5poCB5t1QqA",
-            "qrcode":  "https://api.dev.bes.svipeid.com/oidc/v1/qr/PFE5poCB5t1QqA.png",
-            "applink": "https://app.svipe.com/ad/PFE5poCB5t1QqA?ondevice",
-            "qrauth":  "https://api.dev.bes.svipeid.com/oidc/v1/qrauth/PFE5poCB5t1QqA?ondevice"
+            "qrlink":  "https://app.svipe.com/ad/gmlGaWMcy5lIVg",
+            "qrcode":  "https://api.dev.bes.svipeid.com/oidc/v1/qr/gmlGaWMcy5lIVg.png",
+            "applink": "https://app.svipe.com/ad/gmlGaWMcy5lIVg?ondevice",
+            "qrauth":  "https://api.dev.bes.svipeid.com/oidc/v1/qrauth/gmlGaWMcy5lIVg?ondevice",
             "expires_in": 1799,
-            "expires_at": 1674599675,
+            "expires_at": 1674752828
         }
     }
+
 
 | Value      | Description |
 | :--------- | :---------- |
@@ -197,40 +200,23 @@ This call will return:
 | expires_at | The UTC timestamp in seconds when the QR code will expire. |
 
 
-Now, bring up a local listener on the notification endpoint url. For testing, netcat can be used:
+Now, open a browser with the url returned in the returned qrcode field, scan the qrcode with the Svipe and approve the request.
 
-    nc -l 64738
+Here's a one-liner that will open the qrcode in a browser on macOS (but it requires the JSON parser `jq` which can be installed with `brew`):
 
-Paste the url for qrcode in a browser, scan it with the Svipe app and verify. You should now see an incoming request to the endpoint:
+    curl -s -X POST -d "client_notification_token=tokenXX&login_hint=authref&client_id=17b95961-b261-4c65-b1b8-55b942b78943&scope=profile"  https://api.dev.bes.svipeid.com/oidc/v1/authorize_ciba | jq -r .authref.qrcode | xargs open
 
-    POST / HTTP/1.1
-    Host: 10.10.10.110:64738
-    User-Agent: Svipe backend
-    Accept-Encoding: gzip, deflate
-    Accept: */*
-    Connection: keep-alive
-    Content-Type: application/json
-    Authorization: Bearer tokenXX
-    Content-Length: 1451
 
-    {"auth_req_id": "t2jXiMScQ_PPtkUpS3CyY-jNdDbNg7DK83fiAJgn", "access_token": "Y_Eb7UhH99BvjfFmmwIVWAaZ0hA", "token_type": "Bearer", "expires_in": 120, "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InZXVnBUQWNlSTdVT1VzX2Z0RUZDeFlfRWV2U0U5d09PZkhkMm4ybE1QNlEiLCJrdHkiOiJSU0EifQ.eyJleHAiOjE2NzQ2MDA2MjcsImlhdCI6MTY3NDU5NzMyNywibmJmIjoxNjc0NTk3MzI3LCJpc3MiOiJodHRwczovL2FwaS5kZXYuYmVzLnN2aXBlaWQuY29tL29pZGMvdjEiLCJhdWQiOiIwNDg2ZTFmMS02MzFlLTQzODYtOWI4OS0zOWU5MWIxOTFlNjIiLCJhdXRoX3RpbWUiOjE2NzQ1OTczMjcsInN1YiI6ImMxY2M0MmVkNzRjZjQ2Y2Q4OWFlN2U2NGUzNTNlMTAxIiwic3ZpcGVpZCI6ImMxY2M0MmVkNzRjZjQ2Y2Q4OWFlN2U2NGUzNTNlMTAxIiwiYXRfaGFzaCI6Im0yVGVYRGVzUGpXV05uQ0daN0VOX0EiLCJnaXZlbl9uYW1lIjoiU3RlZmFuIERpY2siLCJmYW1pbHlfbmFtZSI6IkZhcmVzdGFtIiwibmFtZSI6IlN0ZWZhbiBEaWNrIEZhcmVzdGFtIn0.GQk4ffykLblh-sP4uztgRipQfyZYsDDaA-oF4pMLTcwiypRqr23YdTFnUA74VjuCloqcYogc3mUKyEiaeUz8IjMe621Jammz2l_dfviehyIHVSZKwGmLAlOJJ4WMzioWOMr_u_6cLmE1UOWuydPkV-U9ypvnbNFzCqlygLjUVfruhlTi8ZOu91v6r6PCLrf-BLEmsnKcm1nDQTuBclfP_NrLvTZbAatrJ7Ed33qfhFeA4RauXIWY14qdNoFihFqHY9291pM_WI4bWba7lBwbBo8mAprUGBQbc7vDRgjF2AQW_MlAxHmUu6jeyj4_-5OXIHqU80HR5vK4OPkr9fsQy08oNnEnoNNM_5i4GPtkg_p-XnouFlfANs1VDE7Iqgz-7z_Uy9dI573NrHxHhxWtYzYS770bxILJRqyatdIUDr1UltrztkQqu8M3ARgBHfI_PcL8Cfn_HOEOWXhbvSEMStgF82SvZfeZfvliBrUm-Hh8bxetxKcEiml6gR961D_Ed2XCu-pZsO-dHmvrgT761KCzrrwIbtBhADGjbHeAZYy4Xf1KHvsCSSBra5JwqBkVusu6MjE3KM4Li-i-2w-zs0lTEy65NExIgmHfyM3UrP2oVnsOtF0_wCqgHFKJhbqWIXCOO-NRU5FLOPAra6FxyZYd4QN3zja-ficUqxxfJ8Y"}
+When the request has been approved in the app, you will see the incoming http post to the endpoint that you created:
+
+![ciba response](./images/oidc/ciba_response.jpg)
+
 
 The id_token is a signed JWT (use [jwt.io](https://jwt.io) to view) and contains a body with the result of the authentication request:
 
-    {
-    "exp": 1674600627,
-    "iat": 1674597327,
-    "nbf": 1674597327,
-    "iss": "https://api.dev.bes.svipeid.com/oidc/v1",
-    "aud": "0486e1f1-631e-4386-9b89-39e91b191e62",
-    "auth_time": 1674597327,
-    "sub": "c1cc42ed74cf46cd89ae7e64e353e101",
-    "svipeid": "c1cc42ed74cf46cd89ae7e64e353e101",
-    "at_hash": "m2TeXDesPjWWNnCGZ7EN_A",
-    "given_name": "Stefan Dick",
-    "family_name": "Farestam",
-    "name": "Stefan Dick Farestam"
-    }
+![ciba jwt](./images/oidc/ciba_jwt.jpg)
+
+Note that the incoming request has an authorization header that includes the bearer token that you used in the first request. Also, the JSON body contains the `auth_req_id` that was returned by the first call.
 
 As you can see, the CIBA flow is very simple and well suited for a non-browser-based authentication. You only need to manage the display of the qrcode.
 
