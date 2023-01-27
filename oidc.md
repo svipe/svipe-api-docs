@@ -165,27 +165,27 @@ Create a new app in the Svipe Developer portal, enable CIBA and configure push d
 
 Note that the `Client notfication endpoint` needs to be a publicly available host that is reachable from the Svipe backend server. If you use a self-signed https server, then select `Self-signed endpoint` and the SSL certificate will not be verified.
 
-In this example we have used the free service from [API Mocha](https://apimocha.com), which allows you to instantly create a free endpoint that accepts and displays an incoming http request.
+In this example we have used a free service from [API Mocha](https://apimocha.com), which allows you to instantly create a free endpoint that accepts and displays an incoming http request.
 
 ## CIBA walkthrough with curl
 
 Let's do a full authorization using the command line. Start by initiating a CIBA request (but replace the value for `client_id` with the one for the app that you configured in the developer portal):
 
-    curl -X POST -d "client_notification_token=tokenXX&login_hint=authref&client_id=0234e1f1-631e-4386-9b89-39e91b191e62&scope=profile"  https://api.dev.bes.svipeid.com/oidc/v1/authorize_ciba
+    curl -X POST -d "client_notification_token=tokenXX&login_hint=authref&client_id=6d494ffb-64ec-414e-a886-68d93fc3d8e7&scope=profile"  https://api.svipe.com/oidc/v1/authorize_ciba
 
 This call will return:
 
     {
-    "auth_req_id": "1OI-MCPvdV2BnuMNDAgjgFNUEWkWJFw0KSkBkCVq",
-    "expires_in": 1800,
-    "interval": 5,
+        "auth_req_id": "CzLMlkHCwHjsX737FOh5f851xj68htetwtkfyuOj",
+        "expires_in": 1800,
+        "interval": 5,
         "authref": {
-            "qrlink":  "https://app.svipe.com/ad/gmlGaWMcy5lIVg",
-            "qrcode":  "https://api.dev.bes.svipeid.com/oidc/v1/qr/gmlGaWMcy5lIVg.png",
-            "applink": "https://app.svipe.com/ad/gmlGaWMcy5lIVg?ondevice",
-            "qrauth":  "https://api.dev.bes.svipeid.com/oidc/v1/qrauth/gmlGaWMcy5lIVg?ondevice",
+            "qrlink": "https://app.svipe.com/a/jmyMx12rjgbwLA",
+            "qrcode": "https://api.svipe.com/oidc/v1/qr/jmyMx12rjgbwLA.png",
+            "applink": "https://app.svipe.com/a/jmyMx12rjgbwLA?ondevice",
+            "qrauth": "https://api.svipe.com/oidc/v1/qrauth/jmyMx12rjgbwLA?ondevice",
             "expires_in": 1799,
-            "expires_at": 1674752828
+            "expires_at": 1674817214
         }
     }
 
