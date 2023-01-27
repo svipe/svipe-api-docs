@@ -223,6 +223,12 @@ Note that the incoming request has an authorization header that includes the bea
 
 As you can see, the CIBA flow is very simple and well suited for a non-browser-based authentication. You only need to manage the display of the qrcode.
 
+## Sample script for pull-based CIBA
+
+An alternative to using CIBA in `push` mode, is to query the Svipe backend continuously using CIBA `pull` mode. While less immediate and more resource-intense, it does have the advantage that you don't need a publicly available endpoint, so it's very easy to get started.
+
+To show how this can be done, we've create a
+[sample bash script](https://github.com/svipe/svipe-oidc-rp-samples/blob/main/3_CIBA/test_ciba.bash). To use it, you only need to register an app in the Svipe Developer Portal and enable it for CIBA.
 
 # Other features
 
