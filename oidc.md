@@ -189,6 +189,9 @@ This call will return:
         }
     }
 
+`auth_req_id` is the request id for the response and will be included in the response to the notification url.
+
+`authref` is returned when the value of the `login_hint` paramater to the initial call to `authorize_ciba` is `authref`, and contains information that will help you to either build or use a pre-generated qrcode that you display to the user:
 
 | Value      | Description |
 | :--------- | :---------- |
@@ -204,7 +207,7 @@ Now, open a browser with the url returned in the returned qrcode field, scan the
 
 Here's a one-liner that will open the qrcode in a browser on macOS (but it requires the JSON parser `jq` which can be installed with `brew`):
 
-    curl -s -X POST -d "client_notification_token=tokenXX&login_hint=authref&client_id=17b95961-b261-4c65-b1b8-55b942b78943&scope=profile"  https://api.dev.bes.svipeid.com/oidc/v1/authorize_ciba | jq -r .authref.qrcode | xargs open
+    curl -s -X POST -d "client_notification_token=tokenXX&login_hint=authref&client_id=6d494ffb-64ec-414e-a886-68d93fc3d8e7&scope=profile"  https://api.svipe.com/oidc/v1/authorize_ciba | jq -r .authref.qrcode | xargs open
 
 
 When the request has been approved in the app, you will see the incoming http post to the endpoint that you created:
