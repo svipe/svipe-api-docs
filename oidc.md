@@ -313,3 +313,21 @@ of values are returned to facilitate the building of a custom QR code page.
 | expires_at | The UTC timestamp in seconds when the QR code will expire. |
 | session    | The OIDC session identifier which is used in the registration call to socketio |
 | server     | The server that should be used for connecting using socketio |
+
+
+## Test Documents
+
+Svipe supoorts the use of test documents to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
+
+
+| login_hint         |
+| ------------------ |
+| prado:SWE-AO-05001 |
+| prado:SWE-AO-04001 |
+| prado:GBR-AO-06001 |
+| prado:FRA-AO-03004 |
+| prado:THA-AO-06001 |
+| prado:USA-AO-05001 |
+
+These test documents were collected from the sites of the national police authories in each country and are named in accordance to the scheme used in [Prado](https://www.consilium.europa.eu/prado/en/search-by-document-country.html), where more details can be found for each document.
+
