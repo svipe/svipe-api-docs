@@ -331,3 +331,6 @@ Svipe supoorts the use of test documents to test Oidc integrations. To trigger t
 
 These test documents were collected from the sites of the national police authories in each country and are named in accordance to the scheme used in [Prado](https://www.consilium.europa.eu/prado/en/search-by-document-country.html), where more details can be found for each document.
 
+If the scope `email` is used, then a sample email is created using the first and the laste name. Similarly, the scope `phone` creates a sample phone number using the country code of the issuing country and in a format complying to phone numbers used in that country.
+
+We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs)
