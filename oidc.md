@@ -317,20 +317,47 @@ of values are returned to facilitate the building of a custom QR code page.
 
 ## Test Documents
 
-Svipe supoorts the use of test documents to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
+Svipe supoorts the use of test documents, to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
 
 
-| login_hint         |
-| ------------------ |
-| prado:SWE-AO-05001 |
-| prado:SWE-AO-04001 |
-| prado:GBR-AO-06001 |
-| prado:FRA-AO-03004 |
-| prado:THA-AO-06001 |
-| prado:USA-AO-05001 |
+| login_hint         |  |  |
+| ------------------ | ------------- | ------------ |
+| test:prado:SWE-AO-05001 | [Document info](https://www.consilium.europa.eu/prado/en/SWE-AO-05001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/SWE-AO-05001/image-353599.html) |
+| test:prado:SWE-AO-04001 | [Document info](https://www.consilium.europa.eu/prado/en/SWE-AO-04001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/SWE-AO-04001/image-276079.html) |
+| test:prado:GBR-AO-06001 | [Document info](https://www.consilium.europa.eu/prado/en/GBR-AO-06001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/GBR-AO-06001/image-325927.html) |
+| test:prado:FRA-AO-03004 | [Document info](https://www.consilium.europa.eu/prado/en/FRA-AO-03004/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/FRA-AO-03004/image-310115.html) |
+| test:prado:THA-AO-06001 | [Document info](https://www.consilium.europa.eu/prado/en/THA-AO-06001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/THA-AO-06001/image-346256.html) |
+| test:prado:USA-AO-05001 | [Document info](https://www.consilium.europa.eu/prado/en/USA-AO-05001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/USA-AO-05001/image-336996.html) |
 
 These test documents were collected from the sites of the national police authories in each country and are named in accordance to the scheme used in [Prado](https://www.consilium.europa.eu/prado/en/search-by-document-country.html), where more details can be found for each document.
 
-If the scope `email` is used, then a sample email is created using the first and the laste name. Similarly, the scope `phone` creates a sample phone number using the country code of the issuing country and in a format complying to phone numbers used in that country.
+If the scope `email` is used, then a sample email is created using the first and the last name. Similarly, the scope `phone` creates a sample phone number using the country code of the issuing country and in a format complying to phone numbers used in that country.
 
-We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs)
+We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs).
+
+A sample of the userinfo returned for `test:prado:SWE-AO-05001` when the scope `document phone email` was used:
+
+    {
+        "sub": "0d320267183d183554aa00a546d130dd",
+        "name": "Svea Specimen",
+        "given_name": "Svea",
+        "family_name": "Specimen",
+        "gender": "female",
+        "birthdate": "1982-08-21",
+        "email": "svea.specimen@no-such-domain.com",
+        "email_verified": true,
+        "phone_number": "+468123456",
+        "phone_number_verified": true,
+        "com.svipe:document_type": "P",
+        "com.svipe:document_type_sdn": "PN",
+        "com.svipe:document_type_sdn_en": "Passport",
+        "com.svipe:document_issuing_country": "SWE",
+        "com.svipe:document_issuing_country_en": "Sweden",
+        "com.svipe:document_nationality": "SWE",
+        "com.svipe:document_nationality_en": "Sweden",
+        "com.svipe:document_administrative_number": "198208212384",
+        "com.svipe:document_number": "XA0000001",
+        "com.svipe:document_expiry_date": "2027-01-01",
+        "com.svipe:svipeid": "0d320267183d183554aa00a546d130dd",
+        "com.svipe:meta_transaction_id": "AYZAJepa.pU9d4yIK_Y5HsW_cULBhUCzulJ56boQF38SGZMpR"
+    }
