@@ -317,7 +317,7 @@ of values are returned to facilitate the building of a custom QR code page.
 
 ## Test Documents
 
-Svipe supoorts the use of test documents, to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
+Svipe supports the use of test documents, to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
 
 
 | login_hint         |  |  |
@@ -335,7 +335,7 @@ If the scope `email` is used, then a sample email is created using the first and
 
 We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs).
 
-A sample of the userinfo returned for `test:prado:SWE-AO-05001` when the scope `document phone email` was used:
+A sample of the userinfo returned for `test:prado:SWE-AO-05001`, when the scope `document phone email` was used:
 
     {
         "sub": "0d320267183d183554aa00a546d130dd",
