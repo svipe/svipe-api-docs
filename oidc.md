@@ -134,7 +134,7 @@ Svipe supports the following ACR values:
 | :------------------------ | :-------------------- |
 | face_present              | The user is required to perform a biometric verification |
 | document_present          | The user is required to verify the presence of the document used to create the Svipe iD with NFC |
-| face_and_document_present | Both of the above     |
+
 
 To request `face_precent`, either specify `acr` as an `id_token` claim:
 
@@ -152,6 +152,24 @@ To request `face_precent`, either specify `acr` as an `id_token` claim:
 or in the `acr_values` request parameter:
 
     &acr_values=face_present
+
+The result of the authentication method is returned in the `id_token`. 
+
+
+| `acr` in request  | values returned in `id_token` |
+| :---------------- | :-------------------------- |
+| no value          |"amr": ["hwk"] |
+| document_present  |"acr": "document_present"<br>"amr": ["hwk", "user"] |
+| face_present      |"acr": "face_present"<br>"amr": ["hwk", "user", "face"] |
+
+The values for `amr` complies with [RFC 8176](https://www.rfc-editor.org/rfc/rfc8176.html):
+
+| Value   | Description           |
+| :------ | :-------------------- |
+| hwk     | Proof-of-Possession (PoP) of a hardware-secured key. All responses from the app are signed with a private key stored in the secure element of the device. |
+| user    | User presence test.  Evidence that the end user is present and interacting with the device. |
+| face    | Biometric authentication using facial recognition. |
+
 
 # CIBA - Client Initiated Backchannel Authentication
 
