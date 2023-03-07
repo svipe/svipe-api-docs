@@ -39,7 +39,7 @@ and `updated_at` are also included).
 
 | Scope       | Claims                                |
 | :---------- | :------------------------------------ |
-| openid      | svipeid                               |
+| openid      | wid                                   |
 | profile     | name, given_name, family_name         |
 | age         | birthdate                             |
 | gender      | gender                                |
@@ -53,7 +53,7 @@ than naming the individual claims.
 
 | Scope         | Claims |
 | :---          | :---
-| document      | name, <br>given_name, <br>family_name, <br>gender, <br>birthdate, <br>com.svipe:svipeid, <br>com.svipe:document_nationality, <br>com.svipe:document_nationality_en, <br>com.svipe:document_type, <br>com.svipe:document_type_sdn, <br>com.svipe:document_type_sdn_en, <br>com.svipe:document_number, <br>com.svipe:document_issuing_country, <br>com.svipe:document_issuing_country_en, <br>com.svipe:document_expiry_date, <br>com.svipe:document_administrative_number
+| document      | name, <br>given_name, <br>family_name, <br>gender, <br>birthdate,  <br>com.svipe:document_nationality, <br>com.svipe:document_nationality_en, <br>com.svipe:document_type, <br>com.svipe:document_type_sdn, <br>com.svipe:document_type_sdn_en, <br>com.svipe:document_number, <br>com.svipe:document_issuing_country, <br>com.svipe:document_issuing_country_en, <br>com.svipe:document_expiry_date, <br>com.svipe:document_administrative_number
 | document_full | same as `document` but also includes `com.svipe:document_portrait`
 
 
@@ -65,7 +65,7 @@ The following claims are derived directly from the identity document used to cre
 
 | Claim                 | Description       |
 | :---                  | :---              |
-| sub                   | A unique identifier for the user. Svipe returns the Svipe iD. |
+| wid                   | The id of the mobile app instance. Also used as `sub` |
 | name                  | The full name.    |
 | given_name            | Given name(s).    |
 | family_name           | Last name(s).     |
@@ -104,7 +104,7 @@ We also support the following non-standard claims, which are all derived from th
 
 | Claim                                     | Description   |
 | :---                                      | :---          |
-| com.svipe:svipeid                         | Same as `sub` above. A globally unique identifier issued by Svipe to the user. Under normal conditions, a given person will retain the same Svipe ID even after renewing the underlying identity document. |
+| com.svipe:svipeid                         | A globally unique identifier issued by Svipe to the user. Under normal conditions, a given person will retain the same Svipe ID even after renewing the underlying identity document. |
 | com.svipe:document_portrait               | Photo from the document, provided as a [data url](https://en.wikipedia.org/wiki/Data_URI_scheme) in JPEG or JPEG2000 format.|
 | com.svipe:document_nationality            | Nationality, provided in [ISO 3166-1 alpha-3 format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) |
 | com.svipe:document_nationality_en         | The english name for the nationality |
