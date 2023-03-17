@@ -47,7 +47,7 @@ and `updated_at` are also included).
 
 | Scope       | Claims                                |
 | :---------- | :------------------------------------ |
-| openid      | svipeid                               |
+| openid      | wid                                   |
 | profile     | name, given_name, family_name         |
 | age         | birthdate                             |
 | gender      | gender                                |
@@ -61,7 +61,7 @@ than naming the individual claims.
 
 | Scope         | Claims |
 | :---          | :---
-| document      | name, <br>given_name, <br>family_name, <br>gender, <br>birthdate, <br>com.svipe:svipeid, <br>com.svipe:document_nationality, <br>com.svipe:document_nationality_en, <br>com.svipe:document_type, <br>com.svipe:document_type_sdn, <br>com.svipe:document_type_sdn_en, <br>com.svipe:document_number, <br>com.svipe:document_issuing_country, <br>com.svipe:document_issuing_country_en, <br>com.svipe:document_expiry_date, <br>com.svipe:document_administrative_number
+| document      | name, <br>given_name, <br>family_name, <br>gender, <br>birthdate,  <br>com.svipe:document_nationality, <br>com.svipe:document_nationality_en, <br>com.svipe:document_type, <br>com.svipe:document_type_sdn, <br>com.svipe:document_type_sdn_en, <br>com.svipe:document_number, <br>com.svipe:document_issuing_country, <br>com.svipe:document_issuing_country_en, <br>com.svipe:document_expiry_date, <br>com.svipe:document_administrative_number
 | document_full | same as `document` but also includes `com.svipe:document_portrait`
 
 
@@ -73,7 +73,7 @@ The following claims are derived directly from the identity document used to cre
 
 | Claim                 | Description       |
 | :---                  | :---              |
-| sub                   | A unique identifier for the user. Svipe returns the Svipe iD. |
+| wid                   | The id of the mobile app instance. Also used as `sub` |
 | name                  | The full name.    |
 | given_name            | Given name(s).    |
 | family_name           | Last name(s).     |
@@ -112,7 +112,7 @@ We also support the following non-standard claims, which are all derived from th
 
 | Claim                                     | Description   |
 | :---                                      | :---          |
-| com.svipe:svipeid                         | Same as `sub` above. A globally unique identifier issued by Svipe to the user. Under normal conditions, a given person will retain the same Svipe ID even after renewing the underlying identity document. |
+| com.svipe:svipeid                         | A globally unique identifier issued by Svipe to the user. Under normal conditions, a given person will retain the same Svipe ID even after renewing the underlying identity document. |
 | com.svipe:document_portrait               | Photo from the document, provided as a [data url](https://en.wikipedia.org/wiki/Data_URI_scheme) in JPEG or JPEG2000 format.|
 | com.svipe:document_nationality            | Nationality, provided in [ISO 3166-1 alpha-3 format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) |
 | com.svipe:document_nationality_en         | The english name for the nationality |
@@ -142,7 +142,7 @@ Svipe supports the following ACR values:
 | :------------------------ | :-------------------- |
 | face_present              | The user is required to perform a biometric verification |
 | document_present          | The user is required to verify the presence of the document used to create the Svipe iD with NFC |
-| face_and_document_present | Both of the above     |
+
 
 To request `face_precent`, either specify `acr` as an `id_token` claim:
 
@@ -160,6 +160,24 @@ To request `face_precent`, either specify `acr` as an `id_token` claim:
 or in the `acr_values` request parameter:
 
     &acr_values=face_present
+
+The result of the authentication method is returned in the `id_token`. 
+
+
+| `acr` in request  | values returned in `id_token` |
+| :---------------- | :-------------------------- |
+| no value          |"amr": ["hwk"] |
+| document_present  |"acr": "document_present"<br>"amr": ["hwk", "user"] |
+| face_present      |"acr": "face_present"<br>"amr": ["hwk", "user", "face"] |
+
+The values for `amr` complies with [RFC 8176](https://www.rfc-editor.org/rfc/rfc8176.html):
+
+| Value   | Description           |
+| :------ | :-------------------- |
+| hwk     | Proof-of-Possession (PoP) of a hardware-secured key. All responses from the app are signed with a private key stored in the secure element of the device. |
+| user    | User presence test.  Evidence that the end user is present and interacting with the device. |
+| face    | Biometric authentication using facial recognition. |
+
 
 # CIBA - Client Initiated Backchannel Authentication
 
@@ -321,3 +339,51 @@ of values are returned to facilitate the building of a custom QR code page.
 | expires_at | The UTC timestamp in seconds when the QR code will expire. |
 | session    | The OIDC session identifier which is used in the registration call to socketio |
 | server     | The server that should be used for connecting using socketio |
+
+
+## Test Documents
+
+Svipe supports the use of test documents, to test Oidc integrations. To trigger the use of a test document, rather than a real user authentication, the value of the oidc parameter `login_hint` needs to be set to one of the following supported test documents: 
+
+
+| login_hint         |  |  |
+| ------------------ | ------------- | ------------ |
+| test:prado:SWE-AO-05001 | [Document info](https://www.consilium.europa.eu/prado/en/SWE-AO-05001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/SWE-AO-05001/image-353599.html) |
+| test:prado:SWE-AO-04001 | [Document info](https://www.consilium.europa.eu/prado/en/SWE-AO-04001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/SWE-AO-04001/image-276079.html) |
+| test:prado:GBR-AO-06001 | [Document info](https://www.consilium.europa.eu/prado/en/GBR-AO-06001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/GBR-AO-06001/image-325927.html) |
+| test:prado:FRA-AO-03004 | [Document info](https://www.consilium.europa.eu/prado/en/FRA-AO-03004/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/FRA-AO-03004/image-310115.html) |
+| test:prado:THA-AO-06001 | [Document info](https://www.consilium.europa.eu/prado/en/THA-AO-06001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/THA-AO-06001/image-346256.html) |
+| test:prado:USA-AO-05001 | [Document info](https://www.consilium.europa.eu/prado/en/USA-AO-05001/index.html) | [Biodata page](https://www.consilium.europa.eu/prado/en/USA-AO-05001/image-336996.html) |
+
+These test documents were collected from the sites of the national police authories in each country and are named in accordance to the scheme used in [Prado](https://www.consilium.europa.eu/prado/en/search-by-document-country.html), where more details can be found for each document.
+
+If the scope `email` is used, then a sample email is created using the first and the last name. Similarly, the scope `phone` creates a sample phone number using the country code of the issuing country and in a format complying to phone numbers used in that country.
+
+We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs).
+
+A sample of the userinfo returned for `test:prado:SWE-AO-05001`, when the scope `document phone email` was used:
+
+    {
+        "sub": "0d320267183d183554aa00a546d130dd",
+        "name": "Svea Specimen",
+        "given_name": "Svea",
+        "family_name": "Specimen",
+        "gender": "female",
+        "birthdate": "1982-08-21",
+        "email": "svea.specimen@no-such-domain.com",
+        "email_verified": true,
+        "phone_number": "+468123456",
+        "phone_number_verified": true,
+        "com.svipe:document_type": "P",
+        "com.svipe:document_type_sdn": "PN",
+        "com.svipe:document_type_sdn_en": "Passport",
+        "com.svipe:document_issuing_country": "SWE",
+        "com.svipe:document_issuing_country_en": "Sweden",
+        "com.svipe:document_nationality": "SWE",
+        "com.svipe:document_nationality_en": "Sweden",
+        "com.svipe:document_administrative_number": "198208212384",
+        "com.svipe:document_number": "XA0000001",
+        "com.svipe:document_expiry_date": "2027-01-01",
+        "com.svipe:svipeid": "0d320267183d183554aa00a546d130dd",
+        "com.svipe:meta_transaction_id": "AYZAJepa.pU9d4yIK_Y5HsW_cULBhUCzulJ56boQF38SGZMpR"
+    }
