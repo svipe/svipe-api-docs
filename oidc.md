@@ -39,7 +39,7 @@ and `updated_at` are also included).
 
 | Scope       | Claims                                |
 | :---------- | :------------------------------------ |
-| openid      | wid                                   |
+| openid      | sub                                   |
 | profile     | name, given_name, family_name         |
 | age         | birthdate                             |
 | gender      | gender                                |
@@ -65,7 +65,7 @@ The following claims are derived directly from the identity document used to cre
 
 | Claim                 | Description       |
 | :---                  | :---              |
-| wid                   | The id of the mobile app instance. Also used as `sub` |
+| sub                   | The id of the mobile app instance. Also available as `wid` (wallet id) |
 | name                  | The full name.    |
 | given_name            | Given name(s).    |
 | family_name           | Last name(s).     |
