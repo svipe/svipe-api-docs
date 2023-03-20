@@ -357,22 +357,24 @@ Svipe supports the use of test documents, to test Oidc integrations. To trigger 
 
 These test documents were collected from the sites of the national police authories in each country and are named in accordance to the scheme used in [Prado](https://www.consilium.europa.eu/prado/en/search-by-document-country.html), where more details can be found for each document.
 
+Note that `com.svipe:document_expiry_date` is generated dynamically to a random date 7-10 years into the future. This is to ensure that test documents are always available, but it means that if these documents are included in automatic testing, then the returned expiry date will vary for each request.
+
 If the scope `email` is used, then a sample email is created using the first and the last name. Similarly, the scope `phone` creates a sample phone number using the country code of the issuing country and in a format complying to phone numbers used in that country.
 
 We have provided a sample bash script that showcases the usage and uses curl. It can be found [here](https://github.com/svipe/svipe-oidc-test-docs).
 
-A sample of the userinfo returned for `test:prado:SWE-AO-05001`, when the scope `document phone email` was used:
+A sample of the userinfo returned for `test:prado:SWE-AO-05001`, when the scope `document phone email svipeid` was used:
 
     {
-        "sub": "0d320267183d183554aa00a546d130dd",
+        "sub": "ArJVBebyH_9PeQYNddCJSegG_ue21gx-pVTPTWkpxJ_K",
         "name": "Svea Specimen",
         "given_name": "Svea",
         "family_name": "Specimen",
         "gender": "female",
         "birthdate": "1982-08-21",
-        "email": "svea.specimen@no-such-domain.com",
+        "email": "svea.specimen@no-such-domain.se",
         "email_verified": true,
-        "phone_number": "+468123456",
+        "phone_number": "+468123455",
         "phone_number_verified": true,
         "com.svipe:document_type": "P",
         "com.svipe:document_type_sdn": "PN",
@@ -383,7 +385,7 @@ A sample of the userinfo returned for `test:prado:SWE-AO-05001`, when the scope 
         "com.svipe:document_nationality_en": "Sweden",
         "com.svipe:document_administrative_number": "198208212384",
         "com.svipe:document_number": "XA0000001",
-        "com.svipe:document_expiry_date": "2027-01-01",
-        "com.svipe:svipeid": "0d320267183d183554aa00a546d130dd",
+        "com.svipe:document_expiry_date": "2033-03-19",
+        "com.svipe:svipeid": "334d68d3e50978b908b3d65652e6d6b2",
         "com.svipe:meta_transaction_id": "AYZAJepa.pU9d4yIK_Y5HsW_cULBhUCzulJ56boQF38SGZMpR"
     }
