@@ -6,7 +6,7 @@ The first thing the user needs to do is to onboard using the svipe app, their bi
 
 As soon as users download and open the app, they see the welcoming page. Here they need to choose which document they want to use. After this, they need to accept the terms and conditions and press the "Next" button.
 
-![welcome](./images/onboarding/onboard1.png)
+![welcome](./images/onboarding/onboard1.PNG)
 
 ## Step 2 - Scanning the MRZ
 
@@ -18,7 +18,7 @@ Now, user needs to scan the MRZ (Machine-Readable Zone) with their phone. They j
 
 The next step is scanning the biometric chip inside the document. By placing the document against the back of the phone the reading is initiated. If it's not starting, slide it slowly until it vibrates, then keep still.\
 
-![nfc](./images/onboarding/onboard3.png ':size=150x600')
+![nfc](./images/onboarding/onboard3.PNG ':size=150x600')
 
 Here is a video explanation of scanning the biometric chip:
 
@@ -28,7 +28,7 @@ Here is a video explanation of scanning the biometric chip:
 
 Next step is face verification to prove possession of the document. The user places their phone on  eye level, blinks and smiles.
 
-![face](./images/onboarding/onboard4.png ':size=150x600')
+![face](./images/onboarding/onboard4.PNG ':size=150x600')
 
 Here is a video explanation of face verification:
 
