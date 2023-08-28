@@ -33,3 +33,5 @@ Documentation
   - [Python FastAPI / Flask](lang-python-fastapi-flask.md)
   - [Python Django](lang-python-django.md)
   - [Ruby](lang-ruby.md)
+
+- [**Svipe SDK**](sdk.md)
