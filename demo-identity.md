@@ -13,24 +13,29 @@ identity can never be restored.
 
 ## Provision a demo identity on iOS
 
-Open Settings and search for Svipe:
+Start with a fresh installation of Svipe iD from the app store, so in case you
+have it already installed, then you need to delete your currently installed
+version and reinstall from the app store. Then start the app, approve the
+terms and conditions and click `Next`:
 
-![start screen](./images/demo-identity/demo-ios-1.jpg)
+![start screen](./images/demo-identity/demo-ios-n1.jpg)
 
-click on `Svipe iD` and toggle the `Demo` setting:
+Then, do the following:
+1) Select a document type (it doesn't matter which one)
+2) Click on the Svipe iD logo
+3) Click `Next`
 
-![start screen](./images/demo-identity/demo-ios-2.jpg)
-
-then open the Svipe iD app and wait for the identity to be provisioned:
-
-![start screen](./images/demo-identity/demo-ios-3.jpg)
+![start screen](./images/demo-identity/demo-ios-n2.jpg)
 
 and after 10-15 seconds the demo identity becomes available and can be used as a
 regular identity, if the site or app allows it:
 
-![start screen](./images/demo-identity/demo-ios-4.jpg)
+![start screen](./images/demo-identity/demo-ios-n3.jpg)
 
-To exit demo mode, either change the Demo setting or delete the demo identity within the app.
+To exit demo mode, delete the app or click the top right menu in the app (the
+three dots) and then select `Delete document`. If you chose the latter option,
+you can either create a new demo identity or verify an identity from an identity
+document.
 
 
 ## Provision a demo identity on Android
