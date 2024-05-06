@@ -37,38 +37,30 @@ three dots) and then select `Delete document`. If you chose the latter option,
 you can either create a new demo identity or verify an identity from an identity
 document.
 
-
 ## Provision a demo identity on Android
 
-Long press the SvipeID icon and select App Info
+Start with a fresh installation of Svipe iD from the app store, so in case you
+have it already installed, then you need to delete your currently installed
+version and reinstall from the app store. Then start the app:
 
-![start screen](./images/demo-identity/demo-android-1.jpg)
+![start screen](./images/demo-identity/demo-android-n1.jpg)
 
-Scroll all the way down to `In-app notification settings`:
+approve the terms and conditions and click `Continue`:
 
-![start screen](./images/demo-identity/demo-android-2.jpg)
+![start screen](./images/demo-identity/demo-android-n2.jpg)
 
+wait for the app to initialize:
 
-![start screen](./images/demo-identity/demo-android-3.jpg)
+![start screen](./images/demo-identity/demo-android-n3.jpg)
 
-Select Demo mode
+then click `Try the app without using a real document`:
 
-![start screen](./images/demo-identity/demo-android-4.jpg)
+![start screen](./images/demo-identity/demo-android-n4.jpg)
 
-Activating demo mode will delete any identity currently registered in the app
+and the demo identity is ready to use:
 
-![start screen](./images/demo-identity/demo-android-5.jpg)
+![start screen](./images/demo-identity/demo-android-n5.jpg)
 
-The demo identity is being generated - it can 10-15 seconds.
-
-![start screen](./images/demo-identity/demo-android-6.jpg)
-
-The demo identity is now ready and can be used as a regular identity, if the
-site or app allows it.
-
-![start screen](./images/demo-identity/demo-android-7.jpg)
-
-To exit demo mode, simply delete the demo identity from the [...] menu
 
 
 
