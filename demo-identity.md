@@ -11,33 +11,7 @@ Also note that a new random demo identity will be generated each time, so a demo
 identity can never be restored.
 
 
-## Provision a demo identity on iOS
-
-Start with a fresh installation of Svipe iD from the app store, so in case you
-have it already installed, then you need to delete your currently installed
-version and reinstall from the app store. Then start the app, approve the
-terms and conditions and click `Next`:
-
-![start screen](./images/demo-identity/demo-ios-n1.jpg)
-
-Then, do the following:
-1) Select a document type (it doesn't matter which one)
-2) Click on the Svipe iD logo
-3) Click `Next`
-
-![start screen](./images/demo-identity/demo-ios-n2.jpg)
-
-and after 10-15 seconds the demo identity becomes available and can be used as a
-regular identity, if the site or app allows it:
-
-![start screen](./images/demo-identity/demo-ios-n3.jpg)
-
-To exit demo mode, delete the app or click the top right menu in the app (the
-three dots) and then select `Delete document`. If you chose the latter option,
-you can either create a new demo identity or verify an identity from an identity
-document.
-
-## Provision a demo identity on Android
+## Provision a demo identity
 
 Start with a fresh installation of Svipe iD from the app store, so in case you
 have it already installed, then you need to delete your currently installed
