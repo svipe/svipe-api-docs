@@ -27,6 +27,7 @@ Documentation
   - [Mattermost](app-mattermost.md)
   - [Nextcloud](app-nextcloud.md)
   - [WordPress](app-wordpress.md)
+  - [Okta](app-okta.md)
 
 - Websites
   - [Node.js](lang-node.md)
