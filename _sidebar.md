@@ -35,8 +35,4 @@ Documentation
   - [Python Django](lang-python-django.md)
   - [Ruby](lang-ruby.md)
 
-<<<<<<< HEAD
 - [**Svipe SDK**](sdk.md)
-=======
-- [**Svipe SDK**](sdk.md)
->>>>>>> 68c401541748d5e1707bdee53f5ac9cb28f0c654
